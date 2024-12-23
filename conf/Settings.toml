@@ -1,0 +1,128 @@
+# Dleta工具环境配置文件，优化工具配置的复杂性处理，value不允许使用大写逻辑
+[project]
+name = "rmcp-captain"
+
+[codeAddress]
+ip = "172.17.4.134"
+moduleName = [
+    "rmcp-base",
+    "rmcp-common-api",
+    "rmcp-dependencies",
+    "rmcp-gateway",
+    "rmcp-service-app",
+    "rmcp-service-captain",
+    "rmcp-service-export",
+    "rmcp-service-sync",
+    "rmcp-service-extra",
+    "rmcp-web-front",
+    "rmcp-web-front-vue",
+    "web-captain-vue-new",
+    "rmcp-hq-web",
+    "rmcp-service-sblz",
+    "rmcp-service-app-sync",
+    "rmcp-service-db",
+    "rmcp-service-ims",
+    "rmcp-web-workrisk",
+    "rmcp-auth",
+    "rmcp-mock-test",
+    "rmcp-face-service"
+]
+masterBranch = "master"
+tempBranch = "20241220调度组件切换"
+
+[gitConfig]
+longPathsCode = false
+
+[toolsConfig]
+mavenVersion = "apache-maven-3.9.0"
+innerNet = true
+jsFile = "/build/check-versions.js"
+methodName = "if (shell.which('npm'))"
+[toolsConfig.nodeVersion]
+mainNode = "23"
+extendNode = "14"
+
+[packageCommand]
+webPack = "web-captain-vue-new"
+nodeUpdate = false
+packageOutDir = [
+    "xcopy optional/rmcp-service-captain/target/rmcp-service-captain-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-export/target/rmcp-service-export-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-sync/target/rmcp-service-sync-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-app/target/rmcp-service-app-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-sblz/target/rmcp-service-sblz-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-auth/target/rmcp-auth-1.0.1.RELEASE.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-gateway/target/rmcp-gateway-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-ims/target/rmcp-service-ims-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-mock-test/target/rmcp-mock-test-0.0.1-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-service-extra/target/rmcp-service-extra-1.0-SNAPSHOT.jar targetdic /c /y /h /r",
+    "xcopy optional/rmcp-web-front/target/rmcp-web-front-1.0-SNAPSHOT.jar targetdic /c /y /h /r"
+]
+
+[packageCommand.webAutoPackage]
+productKey = false
+distExist = "optional/rmcp-web-front-vue/src/main/resources/META-INF/resources/pages/dist"
+runTest =  "call npm run test"
+runBuild = "call npm run build"
+delDist = "del /f /s /q optional/rmcp-web-front-vue/src/main/resources/META-INF/resources/pages/dist/*.*"
+distCopy = "xcopy optional/web-captain-vue-new/dist optional/rmcp-web-front-vue/src/main/resources/META-INF/resources/pages/dist /s /e /c /y /h /r"
+distChange = "optional/rmcp-web-front-vue"
+mvnPac = "optional clean  install -Dmaven.test.skip=true"
+webChange = "xcopy optional/rmcp-web-front-vue/target/rmcp-web-front-vue-1.0-SNAPSHOT.jar targetdic /c /y /h /r"
+
+[packageCommand.servicePackage]
+depenPath = "optional/rmcp-dependencies"
+mvnExec = "optional clean  install -Dmaven.test.skip=true"
+
+# optional用于程序替换实际运行地址
+[packageCommand.sblzPackage]
+buildKey = true
+sblzWeb = "rmcp-hq-web"
+sblzService = "rmcp-service-sblz"
+resdistExist = "optional/rmcp-service-sblz/src/main/resources/static/pages/dist"
+sblzrunBuild = "call npm run build"
+sblzdelDist = "del /f /s /q optional/rmcp-service-sblz/src/main/resources/static/pages/dist/*.*"
+sblzdistCopy = "xcopy optional/rmcp-hq-web/dist optional/rmcp-service-sblz/src/main/resources/static/pages/dist /s /e /c /y /h /r"
+
+[serverInfo]
+ip = "172.17.14.26"
+port = 22
+username = "root"
+password = "overseas"
+jarPackage = [
+    "rmcp-web-front-vue-1.0-SNAPSHOT.jar",
+    "rmcp-service-captain-1.0-SNAPSHOT.jar",
+    "rmcp-service-export-1.0-SNAPSHOT.jar",
+    "rmcp-service-sync-1.0-SNAPSHOT.jar",
+    "rmcp-service-app-1.0-SNAPSHOT.jar",
+    "rmcp-service-sblz-1.0-SNAPSHOT.jar",
+    "rmcp-mock-test-0.0.1-SNAPSHOT.jar",
+    "rmcp-web-front-1.0-SNAPSHOT.jar"
+]
+serverDir = [
+    "/home/captain/front-web-vue",
+    "/home/captain/captain",
+    "/home/captain/export",
+    "/home/captain/sync",
+    "/home/captain/app",
+    "/home/captain/sblz",
+    "/home/captain/mock",
+   " /home/captain/front"
+]
+
+[dependenciesHandle]
+key = true
+depenName = "rmcp-dependencies"
+initModules = [
+    "rmcp-service-captain",
+    "rmcp-service-export",
+    "rmcp-service-sync",
+    "rmcp-service-app",
+    "rmcp-service-sblz",
+    "rmcp-mock-test",
+    "rmcp-web-front",
+   " rmcp-service-extra"
+]
+extendModules = [
+    "rmcp-web-front-vue"
+]
